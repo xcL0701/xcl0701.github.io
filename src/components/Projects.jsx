@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
@@ -7,7 +8,21 @@ import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const ProjectCard = ({ index, name, description, tags, image, source_code_links }) => {
-  const isMobile = window.matchMedia("(max-width: 640px)").matches;
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= "500px");
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Check the initial screen size on mount
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const renderIcon = (platform) => {
     switch (platform) {
@@ -21,15 +36,15 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_links 
   };
 
   return (
-    <motion.div
-      initial={isMobile ? false : "hidden"} // Nonaktifkan animasi untuk mobile
-      animate={isMobile ? false : "visible"}
-      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
-      className={`project-card ${isMobile ? "mobile" : ""}`}
+    <motion.div 
+      variants={fadeIn("up", "spring", index * 0.3, isMobile ? 0.3 : 1)}
+      initial="hidden"
+      animate="show"
+      className="project-card"
     >
       <Tilt
         options={{
-          max: isMobile ? 10 : 45, // Kurangi efek tilt pada mobile
+          max: isMobile ? 20 : 45,
           scale: 1,
           speed: 450,
         }}
@@ -69,7 +84,7 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_links 
               key={`${name}-${tag.name}`}
               className={`text-[14px] ${tag.color}`}
             >
-              #{tag.name}
+              {tag.name}
             </p>
           ))}
         </div>
@@ -81,17 +96,21 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_links 
 const Projects = () => {
   return (
     <>
-      <motion.div variants={textVariant}>
+      <motion.div 
+        variants={textVariant}
+      >
         <p className={`${styles.paddingX} ${styles.sectionSubText}`}>My Work</p>
         <h2 className={`${styles.paddingX} ${styles.sectionHeadText}`}>Projects</h2>
       </motion.div>
 
-      <div className="w-full flex">
-        <motion.p
-          variants={fadeIn("", "", 0.1, 1)}
-          className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
-        ></motion.p>
-      </div>
+      <motion.p
+        initial="hidden"
+        animate="show"
+        variants={fadeIn("", "", 0.1, 1)}
+        className={`${styles.paddingX} mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]`}
+      >
+        Following projects showcases examples of my work. Each project is briefly described with links to code repositories.
+      </motion.p>
 
       <div className={`${styles.paddingX} mt-20 flex flex-wrap gap-7`}>
         {projects.map((project, index) => (
