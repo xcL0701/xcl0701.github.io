@@ -1,5 +1,5 @@
 {
-  
+  "homepage": "https://xcl0701.github.io/Porto",
   "name": "portofolio",
   
   "private": true,
@@ -9,25 +9,12 @@
   "type": "module",
   
   "scripts": {
-  
-    
-  "predeploy": "npm run build",
-  
-    
-  "deploy": "gh-pages -d dist",
-  
-    
-  "dev": "vite",
-  
-    
-  "build": "vite build",
-  
-    
-  "lint": "eslint .",
-  
-    
-  "preview": "vite preview"
-  
+    "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "vite build && gh-pages -d dist",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   
   "dependencies": {
