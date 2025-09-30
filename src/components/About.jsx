@@ -8,18 +8,21 @@ const About = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={`${styles.paddingX} ${styles.sectionSubText}`}>Introduction</p>
-        <h2 className={`${styles.paddingX} ${styles.sectionHeadText}`}>Overview</h2>
+        <p className={`${styles.paddingX} ${styles.sectionSubText}`}>
+          Introduction
+        </p>
+        <h2 className={`${styles.paddingX} ${styles.sectionHeadText}`}>
+          Overview
+        </h2>
       </motion.div>
 
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
-        className={`${styles.paddingX} mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]`}
+        className={`${styles.paddingX} mt-4 text-secondary text-[17px] leading-[30px]`}
       >
-        I am Nicholas Abel Williem, usually called Niko, born in Jakarta, July 1 2023.
-        I am a student at Binus University majoring in Computer Science who is currently studying in the 5th semester.
-        I specifically studied Interactive Multimedia to support my interest in the design and visuals of an application or web.
-        While I find immense satisfaction working on front-end projects, I maintain a strong desire and readiness to learn new concepts and technologies.
+        Hello, my name is Nicholas Abel Williem, and I usually go by Niko. I was born in Jakarta on July 1, 2003. I am a Computer Science graduate from Binus University.
+        During my studies, I specialized in Interactive Multimedia to support my strong interest in the design and visuals of applications and web interfaces.
+        While I find immense satisfaction in working on Front-End Development projects, I maintain a strong desire and readiness to continuously learn new concepts and technologies.
       </motion.p>
     </>
   );
